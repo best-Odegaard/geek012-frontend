@@ -1,0 +1,1 @@
+import{n as a,L as s,Q as e,i as n,O as r,v as t}from"./index-CypUL6_S.js";const o=a({__name:"generate",setup:a=>(s(()=>{e({url:"/pages/plan/wizard"})}),(a,s)=>{const e=t;return r(),n(e)})});export{o as default};

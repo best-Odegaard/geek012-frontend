@@ -1,0 +1,110 @@
+.loading-view[data-v-c2822a7d] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 0;
+}
+.spinner[data-v-c2822a7d] {
+  width: 1.875rem;
+  height: 1.875rem;
+  border: 0.125rem solid #E2E8F0;
+  border-top-color: #3B82F6;
+  border-radius: 50%;
+  animation: spin-c2822a7d 0.8s linear infinite;
+}
+.loading-text[data-v-c2822a7d] {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+@keyframes spin-c2822a7d {
+to {
+    transform: rotate(360deg);
+}
+}
+.banner[data-v-847a7a77] {
+  height: 15.625rem;
+}
+.banner-img[data-v-847a7a77] {
+  width: 100%;
+  height: 100%;
+}
+.content[data-v-847a7a77] {
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+.name[data-v-847a7a77] {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1E293B;
+  display: block;
+}
+.meta[data-v-847a7a77] {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+}
+.rating[data-v-847a7a77] {
+  color: #F59E0B;
+  font-size: 0.875rem;
+}
+.city[data-v-847a7a77] {
+  color: #64748B;
+  font-size: 0.8125rem;
+}
+.price[data-v-847a7a77] {
+  color: #EF4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.open-time[data-v-847a7a77], .address[data-v-847a7a77] {
+  font-size: 0.8125rem;
+  color: #64748B;
+  margin-top: 0.375rem;
+  display: block;
+}
+.section[data-v-847a7a77] {
+  margin-top: 1rem;
+}
+.section-title[data-v-847a7a77] {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin-bottom: 0.375rem;
+  display: block;
+}
+.desc[data-v-847a7a77] {
+  font-size: 0.875rem;
+  color: #64748B;
+  line-height: 1.8;
+}
+.bottom-bar[data-v-847a7a77] {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  background: #fff;
+  box-shadow: 0 -0.0625rem 0.375rem rgba(0, 0, 0, 0.06);
+}
+.bar-btn[data-v-847a7a77] {
+  flex: 1;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 0.875rem;
+  border-radius: 1.25rem;
+  background: #F8FAFC;
+  color: #1E293B;
+  border: none;
+}
+.bar-btn[data-v-847a7a77]::after {
+  border: none;
+}
+.bar-btn.primary[data-v-847a7a77] {
+  background: #3B82F6;
+  color: #fff;
+}

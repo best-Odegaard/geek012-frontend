@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+.theme-light {
+  --primary: #{$primary-color};
+  --secondary: #{$secondary-color};
+  --bg: #{$bg-color};
+  --text: #{$text-color};
+}
+
+.theme-dark {
+  --primary: #{$primary-color};
+  --secondary: #{$secondary-color};
+  --bg: #0F172A;
+  --text: #F1F5F9;
+}

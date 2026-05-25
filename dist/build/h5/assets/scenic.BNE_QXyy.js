@@ -1,0 +1,1 @@
+import{t}from"./index-CypUL6_S.js";function c(c){return t.get("/scenic/list",c)}function e(c){return t.get(`/scenic/${c}`)}function n(c){return t.post(`/scenic/${c}/collect`)}function s(c){return t.delete(`/scenic/${c}/collect`)}export{c as a,n as c,e as g,s as u};

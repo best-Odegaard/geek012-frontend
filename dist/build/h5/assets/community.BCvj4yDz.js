@@ -1,0 +1,1 @@
+import{t}from"./index-CypUL6_S.js";function n(n){return t.get("/community/list",n)}function o(n){return t.get(`/community/${n}`)}function i(n){return t.post("/community/publish",n,{showLoading:!0,loadingText:"发布中..."})}export{n as a,o as g,i as p};
