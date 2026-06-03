@@ -1,17 +1,25 @@
-// 竞品风格：极简黑白 + 淡蓝卡片
-$primary-color: #000000;
-$accent-blue: #E6F4FF;
-$accent-border: #B8E4F0;
+// 途灵 UI 原型：薄荷绿主题（保留原有变量名以兼容组件）
+$mint-primary: #A8E6CF;
+$mint-secondary: #B5EAD7;
+$mint-light: #D1F2EB;
+$mint-input: #E8F5F2;
+$mint-text: #5A7B74;
+$mint-page: #F9FDFB;
+$mint-tag-pink: #FFD6E0;
+
+$primary-color: $mint-primary;
+$accent-blue: $mint-light;
+$accent-border: rgba(168, 230, 207, 0.3);
 $secondary-color: #14B8A6;
 $success-color: #22C55E;
 $warning-color: #F59E0B;
 $error-color: #EF4444;
-$bg-color: #F5F5F5;
-$page-bg: #F8F8F8;
-$text-color: #000000;
-$text-secondary: #666666;
-$text-placeholder: #999999;
-$border-color: #E8E8E8;
+$bg-color: $mint-page;
+$page-bg: $mint-page;
+$text-color: $mint-text;
+$text-secondary: rgba(90, 123, 116, 0.7);
+$text-placeholder: rgba(90, 123, 116, 0.45);
+$border-color: $mint-input;
 $card-radius: 24rpx;
 $card-radius-lg: 32rpx;
 $page-padding: 32rpx;

@@ -37,7 +37,7 @@ onMounted(async () => {
 })
 
 function goGenerate() {
-  uni.switchTab({ url: '/pages/ai/generate' })
+  uni.navigateTo({ url: '/pages/plan/survey' })
 }
 
 function viewTrip(trip: TripPlan) {

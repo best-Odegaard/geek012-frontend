@@ -1,1 +1,0 @@
-import{t}from"./index-CypUL6_S.js";function i(i){return t.get("/activity/list",i)}function n(i){return t.get(`/activity/${i}`)}function o(i){return t.post(`/activity/${i}/enroll`,{},{showLoading:!0})}export{i as a,o as e,n as g};

@@ -2,9 +2,16 @@
   <view v-if="visible" class="menu-root" @tap="close">
     <view class="menu-mask" />
     <view class="menu-panel" @tap.stop>
-      <view class="menu-item menu-item-primary" @tap="onCreateNew">
-        <text class="menu-title font-hand">创建新的计划</text>
-        <text class="menu-icon">+</text>
+      <view class="menu-item menu-item-primary" @tap="onSurvey">
+        <text class="menu-title font-hand">旅行问卷</text>
+        <text class="menu-icon">📋</text>
+      </view>
+      <view class="menu-item" @tap="onCreateNew">
+        <view class="menu-text">
+          <text class="menu-title font-hand">智能规划行程</text>
+          <text class="menu-desc">填写目的地、天数与偏好，AI 生成计划</text>
+        </view>
+        <text class="menu-icon secondary">✦</text>
       </view>
       <view class="menu-item" @tap="onSmartImport">
         <view class="menu-text">
@@ -33,6 +40,11 @@ const { showCreateMenu: visible } = storeToRefs(appStore)
 
 function close() {
   appStore.closeCreateMenu()
+}
+
+function onSurvey() {
+  close()
+  uni.navigateTo({ url: '/pages/plan/survey' })
 }
 
 function onCreateNew() {
@@ -108,15 +120,15 @@ function onCollect() {
 }
 
 .menu-item-primary {
-  background: #000;
+  background: linear-gradient(135deg, #a8e6cf, #b5ead7);
 
   .menu-title {
-    color: #fff;
+    color: #5a7b74;
   }
 
   .menu-icon {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.4);
+    color: #5a7b74;
+    border-color: rgba(90, 123, 116, 0.2);
   }
 }
 

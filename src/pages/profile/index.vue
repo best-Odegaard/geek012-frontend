@@ -1,5 +1,5 @@
 <template>
-  <view class="page">
+  <view class="page page-with-tabbar">
     <CustomNavbar title="我的" />
 
     <scroll-view scroll-y class="scroll-content" :style="{ paddingTop: navHeight + 'px' }">
@@ -15,7 +15,7 @@
 
       <!-- 数据统计 -->
       <view class="stats card">
-        <view class="stat-item" @tap="goPage('/pages/trip/myTrip')">
+        <view class="stat-item" @tap="goTripTab">
           <text class="stat-num">{{ tripCount }}</text>
           <text class="stat-label">行程</text>
         </view>
@@ -51,12 +51,15 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/store/app'
 import CustomNavbar from '@/components/CustomNavbar/CustomNavbar.vue'
 import { useUserStore } from '@/store/user'
 import { useTripStore } from '@/store/trip'
 import { isLoggedIn } from '@/utils/auth'
 
+const appStore = useAppStore()
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const { userInfo } = storeToRefs(userStore)
@@ -71,12 +74,17 @@ const isLogin = computed(() => isLoggedIn())
 const menuItems = [
   { icon: '⭐', label: '我的收藏', path: '' },
   { icon: '📝', label: '我的游记', path: '' },
-  { icon: '🗺️', label: '我的行程', path: '/pages/trip/myTrip' },
+  { icon: '🗺️', label: '我的行程', path: '/pages/trip/index' },
   { icon: '👁️', label: '浏览历史', path: '' },
   { icon: '💬', label: '意见反馈', path: '' },
   { icon: 'ℹ️', label: '关于我们', path: '' },
   { icon: '⚙️', label: '设置中心', path: '/pages/profile/setting' }
 ]
+
+onShow(() => {
+  appStore.setTabbarIndex(3)
+  appStore.closeCreateMenu()
+})
 
 onMounted(async () => {
   if (isLogin.value) {
@@ -97,6 +105,13 @@ function handleUserTap() {
   }
 }
 
+function goTripTab() {
+  appStore.setTabbarIndex(1)
+  uni.switchTab({ url: '/pages/trip/index' })
+}
+
+const tabPaths = ['/pages/home/index', '/pages/trip/index', '/pages/discover/index', '/pages/profile/index']
+
 function goPage(path: string) {
   if (!path) {
     uni.showToast({ title: '功能开发中', icon: 'none' })
@@ -104,6 +119,12 @@ function goPage(path: string) {
   }
   if (path.includes('trip') && !isLogin.value) {
     uni.navigateTo({ url: '/pages/auth/login' })
+    return
+  }
+  const tabIdx = tabPaths.indexOf(path)
+  if (tabIdx >= 0) {
+    appStore.setTabbarIndex(tabIdx)
+    uni.switchTab({ url: path })
     return
   }
   uni.navigateTo({ url: path })

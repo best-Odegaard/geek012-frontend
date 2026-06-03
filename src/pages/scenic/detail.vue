@@ -42,7 +42,6 @@ import { ref, computed, onMounted } from 'vue'
 import LoadingView from '@/components/LoadingView/LoadingView.vue'
 import { getScenicDetail, collectScenic, uncollectScenic } from '@/api/scenic'
 import { formatRating, formatPrice } from '@/utils/format'
-import { mockScenics } from '@/utils/mock'
 import type { ScenicItem } from '@/api/scenic'
 
 const loading = ref(true)
@@ -59,11 +58,7 @@ onMounted(async () => {
   const page = pages[pages.length - 1] as { options?: { id?: string } }
   scenicId.value = Number(page.options?.id || 0)
 
-  try {
-    detail.value = await getScenicDetail(scenicId.value)
-  } catch {
-    detail.value = mockScenics.find((s) => s.id === scenicId.value) || mockScenics[0]
-  }
+  detail.value = await getScenicDetail(scenicId.value)
   loading.value = false
 })
 

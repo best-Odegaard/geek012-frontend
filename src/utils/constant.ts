@@ -3,6 +3,14 @@
 /** API 基础地址 */
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 
+/**
+ * 是否使用本地 Mock（默认 true，后端就绪后在 .env 设置 VITE_USE_MOCK=false）
+ */
+export const USE_MOCK =
+  import.meta.env.VITE_USE_MOCK === undefined
+    ? true
+    : import.meta.env.VITE_USE_MOCK === 'true'
+
 /** Token 存储键名（与后端 user-token-name 一致） */
 export const TOKEN_KEY = 'Authentication'
 
@@ -100,6 +108,26 @@ export const BANNERS = [
   { id: 1, title: '探索杭州西湖', image: 'https://picsum.photos/seed/banner1/750/360', link: '/pages/scenic/list?city=杭州' },
   { id: 2, title: '成都美食之旅', image: 'https://picsum.photos/seed/banner2/750/360', link: '/pages/plan/wizard' },
   { id: 3, title: '周末CityWalk', image: 'https://picsum.photos/seed/banner3/750/360', link: '/pages/discover/index' }
+] as const
+
+/** 首页 Banner（页面初步预设） */
+export const HOME_BANNERS = [
+  { id: 1, title: '广州塔', subtitle: '璀璨夜景 · 城市地标', emoji: '🗼' },
+  { id: 2, title: '桂林山水', subtitle: '山水甲天下', emoji: '🏞️' },
+  { id: 3, title: '成都熊猫', subtitle: '萌趣之旅 · 巴蜀风情', emoji: '🐼' }
+] as const
+
+/** 首页推荐城市 */
+export const HOME_CITY_PILLS = ['广州', '肇庆', '成都', '重庆', '更多…'] as const
+
+/** 首页热门景点（3 列 × 2 行） */
+export const HOME_ATTRACTIONS = [
+  { id: 1, name: '七星岩', city: '肇庆', rating: 4.8, cover: 'https://picsum.photos/seed/qixing/300/300' },
+  { id: 2, name: '长隆', city: '广州', rating: 4.7, cover: 'https://picsum.photos/seed/chimelong/300/300' },
+  { id: 3, name: '小蛮腰', city: '广州', rating: 4.9, cover: 'https://picsum.photos/seed/canton/300/300' },
+  { id: 4, name: '阳朔西街', city: '桂林', rating: 4.6, cover: 'https://picsum.photos/seed/yangshuo/300/300' },
+  { id: 5, name: '洪崖洞', city: '重庆', rating: 4.8, cover: 'https://picsum.photos/seed/hongya/300/300' },
+  { id: 6, name: '宽窄巷', city: '成都', rating: 4.7, cover: 'https://picsum.photos/seed/kuanzhai/300/300' }
 ] as const
 
 /** 天数选项 */

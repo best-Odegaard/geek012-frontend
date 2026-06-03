@@ -1,57 +1,38 @@
-/** 开发阶段 Mock 数据（后端接口未就绪时使用） */
+/** 开发阶段 Mock 数据（后端未就绪时由 api 层直接返回） */
+import { HOME_ATTRACTIONS } from './constant'
 import type { ScenicItem } from '@/api/scenic'
 import type { ActivityItem } from '@/api/activity'
 import type { CommunityPost } from '@/api/community'
-import type { TripPlan } from '@/api/trip'
+import type { TripPlan, GenerateTripParams } from '@/api/trip'
+import type { UserInfo, LoginParams, LoginResult, RegisterParams } from '@/api/user'
 
-export const mockScenics: ScenicItem[] = [
-  { id: 1, name: '西湖', cover: 'https://picsum.photos/seed/xihu/400/300', rating: 4.9, city: '杭州', price: 0, category: '自然风光' },
-  { id: 2, name: '灵隐寺', cover: 'https://picsum.photos/seed/lingyin/400/300', rating: 4.8, city: '杭州', price: 75, category: '历史文化' },
-  { id: 3, name: '宽窄巷子', cover: 'https://picsum.photos/seed/kuanzhai/400/300', rating: 4.7, city: '成都', price: 0, category: '古镇' },
-  { id: 4, name: '洪崖洞', cover: 'https://picsum.photos/seed/hongya/400/300', rating: 4.8, city: '重庆', price: 0, category: '历史文化' },
-  { id: 5, name: '兵马俑', cover: 'https://picsum.photos/seed/bingmayong/400/300', rating: 4.9, city: '西安', price: 120, category: '博物馆' }
-]
-
-export const mockActivities: ActivityItem[] = [
-  { id: 1, title: '西湖音乐节', cover: 'https://picsum.photos/seed/music/400/300', startTime: '2026-06-01 19:00', location: '杭州西湖', city: '杭州', category: '音乐节' },
-  { id: 2, title: '成都美食节', cover: 'https://picsum.photos/seed/foodfest/400/300', startTime: '2026-05-15 10:00', location: '春熙路', city: '成都', category: '美食节' },
-  { id: 3, title: '故宫文化展', cover: 'https://picsum.photos/seed/exhibit/400/300', startTime: '2026-07-01 09:00', location: '故宫博物院', city: '北京', category: '展览' }
-]
-
-export const mockPosts: CommunityPost[] = [
-  {
-    id: 1,
-    title: '杭州三日游攻略，西湖+灵隐寺完美路线',
-    cover: 'https://picsum.photos/seed/post1/400/500',
-    author: { id: 1, nickname: '旅行小达人', avatar: 'https://picsum.photos/seed/avatar1/100/100' },
-    likeCount: 2340,
-    collectCount: 890,
-    commentCount: 156,
-    createdAt: '2026-05-20'
-  },
-  {
-    id: 2,
-    title: '成都火锅探店指南，本地人推荐',
-    cover: 'https://picsum.photos/seed/post2/400/600',
-    author: { id: 2, nickname: '吃货小王', avatar: 'https://picsum.photos/seed/avatar2/100/100' },
-    likeCount: 1890,
-    collectCount: 670,
-    commentCount: 98,
-    createdAt: '2026-05-18'
-  },
-  {
-    id: 3,
-    title: '重庆夜景CityWalk，洪崖洞到解放碑',
-    cover: 'https://picsum.photos/seed/post3/400/450',
-    author: { id: 3, nickname: '摄影爱好者', avatar: 'https://picsum.photos/seed/avatar3/100/100' },
-    likeCount: 3200,
-    collectCount: 1200,
-    commentCount: 234,
-    createdAt: '2026-05-15'
-  }
-]
+/** 肇庆示例行程（与 UI 预设一致） */
+export const mockZhaoqingTrip: TripPlan = {
+  id: 'mock-zq-1',
+  title: '肇庆1日游',
+  fromCity: '广州',
+  toCity: '肇庆',
+  days: 1,
+  budget: 4000,
+  people: 2,
+  tags: ['自然风光', '悠闲'],
+  estimatedCost: 280,
+  createdAt: '2026-05-01',
+  dayPlans: [
+    {
+      day: 1,
+      title: 'Day 1 肇庆经典',
+      schedules: [
+        { time: '09:00-11:30', title: '七星岩双源洞', description: '开放时间：07:30-17:30', type: 'scenic' },
+        { time: '12:00-13:30', title: '岩前艺术中心', description: '开放时间：全天', type: 'food' },
+        { time: '15:00-17:00', title: '星湖湿地公园', description: '开放时间：08:30-17:30', type: 'scenic' }
+      ]
+    }
+  ]
+}
 
 export const mockTrip: TripPlan = {
+  id: 'mock-hz-1',
   title: '杭州3日精品之旅',
   fromCity: '深圳',
   toCity: '杭州',
@@ -61,15 +42,15 @@ export const mockTrip: TripPlan = {
   tags: ['美食', '摄影'],
   estimatedCost: 2800,
   hotel: '西湖边精品民宿',
+  createdAt: '2026-05-10',
   dayPlans: [
     {
       day: 1,
       title: '西湖经典一日游',
       schedules: [
-        { time: '09:00', title: '西湖', description: '漫步苏堤春晓，欣赏断桥残雪', type: 'scenic' },
-        { time: '12:00', title: '楼外楼午餐', description: '品尝正宗杭帮菜', type: 'food' },
-        { time: '15:00', title: '灵隐寺', description: '千年古刹，感受禅意', type: 'scenic' },
-        { time: '18:00', title: '河坊街', description: '逛古街，品小吃', type: 'scenic' }
+        { time: '09:00', title: '西湖', description: '漫步苏堤春晓', type: 'scenic' },
+        { time: '12:00', title: '楼外楼午餐', description: '品尝杭帮菜', type: 'food' },
+        { time: '15:00', title: '灵隐寺', description: '千年古刹', type: 'scenic' }
       ]
     },
     {
@@ -77,9 +58,7 @@ export const mockTrip: TripPlan = {
       title: '文化深度体验',
       schedules: [
         { time: '09:00', title: '中国丝绸博物馆', type: 'scenic' },
-        { time: '12:00', title: '知味观', description: '小笼包、片儿川', type: 'food' },
-        { time: '14:00', title: '宋城', description: '观看千古情演出', type: 'scenic' },
-        { time: '19:00', title: '西湖音乐喷泉', type: 'scenic' }
+        { time: '14:00', title: '宋城', description: '千古情演出', type: 'scenic' }
       ]
     },
     {
@@ -87,19 +66,137 @@ export const mockTrip: TripPlan = {
       title: '休闲返程',
       schedules: [
         { time: '09:00', title: '西溪湿地', type: 'scenic' },
-        { time: '12:00', title: '外婆家', type: 'food' },
         { time: '15:00', title: '返程', type: 'transport' }
       ]
     }
   ]
 }
 
-/** 安全调用 API，失败时返回 Mock 数据 */
+/** 我的行程列表 */
+export const mockTripList: TripPlan[] = [mockZhaoqingTrip, mockTrip]
+
+const homeScenics: ScenicItem[] = HOME_ATTRACTIONS.map((a) => ({
+  id: a.id,
+  name: a.name,
+  cover: a.cover,
+  rating: a.rating,
+  city: a.city,
+  price: a.id === 2 ? 350 : a.id === 1 ? 78 : 0,
+  category: '自然风光',
+  openTime: '08:00-18:00',
+  description: `${a.name}是${a.city}热门打卡地，适合周末出游。`,
+  address: `${a.city}市`,
+  reason: '推荐理由：景色优美，交通便利。'
+}))
+
+export const mockScenics: ScenicItem[] = [
+  ...homeScenics,
+  { id: 101, name: '西湖', cover: 'https://picsum.photos/seed/xihu/400/300', rating: 4.9, city: '杭州', price: 0, category: '自然风光', openTime: '全天', description: '杭州城市名片。' },
+  { id: 102, name: '灵隐寺', cover: 'https://picsum.photos/seed/lingyin/400/300', rating: 4.8, city: '杭州', price: 75, category: '历史文化' },
+  { id: 103, name: '宽窄巷子', cover: 'https://picsum.photos/seed/kuanzhai/400/300', rating: 4.7, city: '成都', price: 0, category: '古镇' },
+  { id: 104, name: '洪崖洞', cover: 'https://picsum.photos/seed/hongya/400/300', rating: 4.8, city: '重庆', price: 0, category: '历史文化' }
+]
+
+export const mockActivities: ActivityItem[] = [
+  { id: 1, title: '西湖音乐节', cover: 'https://picsum.photos/seed/music/400/300', startTime: '2026-06-01 19:00', location: '杭州西湖', city: '杭州', category: '音乐节', description: '年度音乐盛典。' },
+  { id: 2, title: '成都美食节', cover: 'https://picsum.photos/seed/foodfest/400/300', startTime: '2026-05-15 10:00', location: '春熙路', city: '成都', category: '美食节' },
+  { id: 3, title: '肇庆龙舟赛', cover: 'https://picsum.photos/seed/longzhou/400/300', startTime: '2026-06-10 09:00', location: '星湖', city: '肇庆', category: '文化体验' }
+]
+
+export const mockPosts: CommunityPost[] = [
+  {
+    id: 1,
+    title: '肇庆七星岩一日游攻略',
+    cover: 'https://picsum.photos/seed/post-zq/400/500',
+    author: { id: 1, nickname: '旅行小达人', avatar: 'https://picsum.photos/seed/avatar1/100/100' },
+    likeCount: 2340,
+    collectCount: 890,
+    commentCount: 156,
+    createdAt: '2026-05-20'
+  },
+  {
+    id: 2,
+    title: '成都火锅探店指南',
+    cover: 'https://picsum.photos/seed/post2/400/600',
+    author: { id: 2, nickname: '吃货小王', avatar: 'https://picsum.photos/seed/avatar2/100/100' },
+    likeCount: 1890,
+    collectCount: 670,
+    commentCount: 98,
+    createdAt: '2026-05-18'
+  },
+  {
+    id: 3,
+    title: '重庆夜景 CityWalk',
+    cover: 'https://picsum.photos/seed/post3/400/450',
+    author: { id: 3, nickname: '摄影爱好者', avatar: 'https://picsum.photos/seed/avatar3/100/100' },
+    likeCount: 3200,
+    collectCount: 1200,
+    commentCount: 234,
+    createdAt: '2026-05-15'
+  }
+]
+
+export const mockUser: UserInfo = {
+  id: 1,
+  nickname: '途灵旅人',
+  avatar: 'https://picsum.photos/seed/tourling-user/200/200',
+  phone: '13800000000',
+  bio: '探索世界，记录美好'
+}
+
+let tripStoreMemory = [...mockTripList]
+
+export function getMockTripStore() {
+  return tripStoreMemory
+}
+
+export function setMockTripStore(list: TripPlan[]) {
+  tripStoreMemory = list
+}
+
+export function findMockTrip(id: number | string): TripPlan | undefined {
+  const key = String(id)
+  return tripStoreMemory.find((t) => String(t.id) === key) || (key.includes('zq') ? mockZhaoqingTrip : mockTrip)
+}
+
+export function buildMockTripFromGenerate(params: GenerateTripParams): TripPlan {
+  return {
+    ...mockTrip,
+    id: `mock-gen-${Date.now()}`,
+    title: `${params.toCity}${params.days}日之旅`,
+    fromCity: params.fromCity,
+    toCity: params.toCity,
+    days: params.days,
+    budget: params.budget,
+    people: params.people,
+    tags: params.tags,
+    createdAt: new Date().toISOString().slice(0, 10)
+  }
+}
+
+export function mockLogin(_params: LoginParams): LoginResult {
+  return {
+    token: 'mock-token-tourling',
+    userInfo: mockUser
+  }
+}
+
+/** 安全调用 API，失败时返回 Mock（兼容旧页面写法） */
 export async function withFallback<T>(apiCall: () => Promise<T>, fallback: T): Promise<T> {
   try {
     return await apiCall()
   } catch {
-    console.warn('[Mock] 接口不可用，使用 Mock 数据')
+    console.warn('[Mock] 接口不可用，使用 fallback')
     return fallback
+  }
+}
+
+export function paginate<T>(list: T[], page = 1, pageSize = 20) {
+  const start = (page - 1) * pageSize
+  return {
+    records: list.slice(start, start + pageSize),
+    total: list.length,
+    page,
+    pageSize
   }
 }

@@ -2,7 +2,7 @@
  * 统一请求封装（Axios 风格，基于 uni.request 实现）
  * 支持：Token 自动携带、Loading 控制、统一错误处理、401 跳转登录
  */
-import { API_BASE_URL, REQUEST_TIMEOUT } from './constant'
+import { API_BASE_URL, REQUEST_TIMEOUT, USE_MOCK } from './constant'
 import { getToken, redirectToLogin } from './auth'
 export interface RequestConfig {
   url: string
@@ -111,8 +111,10 @@ function request<T = unknown>(config: RequestConfig): Promise<T> {
         }
       },
       fail: (err) => {
-        uni.showToast({ title: '网络异常，请稍后重试', icon: 'none' })
-        console.error('[Network Error]', url, err)
+        if (!USE_MOCK) {
+          uni.showToast({ title: '网络异常，请稍后重试', icon: 'none' })
+        }
+        console.warn('[Network Error]', url, err)
         reject(err)
       },
       complete: () => {

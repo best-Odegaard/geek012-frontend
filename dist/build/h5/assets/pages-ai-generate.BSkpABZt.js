@@ -1,0 +1,1 @@
+import{p as a,a8 as s,ad as e,k as t,ab as r,w as n}from"./index-Cz03-IlK.js";const o=a({__name:"generate",setup:a=>(s(()=>{e({url:"/pages/ai/chat"})}),(a,s)=>{const e=n;return r(),t(e)})});export{o as default};

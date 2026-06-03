@@ -55,7 +55,7 @@ page {
 }
 
 .btn-black {
-  background: #000;
+  background: linear-gradient(90deg, $mint-primary, $mint-secondary);
   color: #fff;
   border: none;
   border-radius: 999rpx;
@@ -64,6 +64,7 @@ page {
   height: 96rpx;
   line-height: 96rpx;
   text-align: center;
+  box-shadow: 0 8rpx 24rpx rgba(168, 230, 207, 0.35);
 
   &::after {
     border: none;
@@ -72,6 +73,25 @@ page {
   &[disabled] {
     opacity: 0.5;
   }
+}
+
+.btn-mint-outline {
+  background: #fff;
+  color: $mint-primary;
+  border: 2rpx solid $mint-primary;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+
+  &::after {
+    border: none;
+  }
+}
+
+.soft-shadow {
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.06);
 }
 
 .btn-pill-outline {
@@ -102,5 +122,5 @@ page {
 
 /* 页面底部为自定义 TabBar 留白 */
 .page-with-tabbar {
-  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+  padding-bottom: calc(200rpx + env(safe-area-inset-bottom));
 }

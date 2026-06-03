@@ -28,7 +28,6 @@ import { ref, onMounted } from 'vue'
 import LoadingView from '@/components/LoadingView/LoadingView.vue'
 import { getActivityDetail, collectActivity, uncollectActivity, enrollActivity } from '@/api/activity'
 import { formatDate } from '@/utils/format'
-import { mockActivities } from '@/utils/mock'
 import type { ActivityItem } from '@/api/activity'
 
 const loading = ref(true)
@@ -38,11 +37,7 @@ onMounted(async () => {
   const pages = getCurrentPages()
   const page = pages[pages.length - 1] as { options?: { id?: string } }
   const id = Number(page.options?.id || 0)
-  try {
-    detail.value = await getActivityDetail(id)
-  } catch {
-    detail.value = mockActivities.find((a) => a.id === id) || mockActivities[0]
-  }
+  detail.value = await getActivityDetail(id)
   loading.value = false
 })
 

@@ -61,11 +61,15 @@ src/
 
 ```
 VITE_API_BASE_URL=http://localhost:8080
+VITE_USE_MOCK=true
 ```
+
+- `VITE_USE_MOCK=true`（默认）：所有 `src/api/*.ts` 走 `src/api/mock/handlers.ts` 本地数据，**不会发起网络请求**，避免「网络异常」提示
+- 后端就绪后设 `VITE_USE_MOCK=false`，将请求真实接口
 
 Token 请求头名称：`Authentication`（与后端一致）
 
 ## 说明
 
-- 后端接口未就绪时，页面会自动降级使用 Mock 数据
+- Mock 数据定义：`src/utils/mock.ts`；接口实现：`src/api/mock/handlers.ts`（与真实 REST 路径注释对应）
 - TabBar 图标为占位图，可替换 `src/static/tabbar/` 下的 PNG 文件

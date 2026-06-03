@@ -10,6 +10,13 @@
       "path": "pages/home/index",
       "style": {
         "navigationStyle": "custom",
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/trip/index",
+      "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "行程"
       }
     },
@@ -18,6 +25,13 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "探索"
+      }
+    },
+    {
+      "path": "pages/profile/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的"
       }
     },
     {
@@ -35,6 +49,20 @@
       }
     },
     {
+      "path": "pages/plan/survey",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "旅行问卷"
+      }
+    },
+    {
+      "path": "pages/ai/chat",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI行程助手"
+      }
+    },
+    {
       "path": "pages/ai/generate",
       "style": {
         "navigationStyle": "custom",
@@ -46,13 +74,6 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "社区"
-      }
-    },
-    {
-      "path": "pages/profile/index",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "我的"
       }
     },
     {
@@ -100,6 +121,7 @@
     {
       "path": "pages/trip/detail",
       "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "行程详情"
       }
     },
@@ -151,11 +173,19 @@
     "list": [
       {
         "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/trip/index",
         "text": "行程"
       },
       {
         "pagePath": "pages/discover/index",
         "text": "探索"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
       }
     ]
   }

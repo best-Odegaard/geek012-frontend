@@ -4,7 +4,7 @@
       <view class="header-inner">
         <view class="brand">
           <view class="logo">⛰</view>
-          <text class="brand-name">探索</text>
+          <text class="brand-name">探索发现</text>
         </view>
         <text class="search-btn" @tap="goSearch">🔍 搜索</text>
       </view>
@@ -132,7 +132,7 @@ const isEmpty = computed(() => {
 })
 
 onShow(() => {
-  appStore.setTabbarIndex(1)
+  appStore.setTabbarIndex(2)
   appStore.closeCreateMenu()
 })
 
